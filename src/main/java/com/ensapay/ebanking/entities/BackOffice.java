@@ -3,6 +3,7 @@ package com.ensapay.ebanking.entities;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 import javax.persistence.*;
 import java.util.List;
@@ -11,17 +12,15 @@ import java.util.List;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-
-public class Agent {
-    @Id @GeneratedValue (strategy = GenerationType.IDENTITY)
+@ToString
+public class BackOffice {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String name ;
+    private String nom ;
     private String prenom;
     private String email;
     private  String phone ;
-    @OneToMany(mappedBy = "agent")
-    List<Client> clients;
-    @ManyToOne
-    BackOffice backOffice;
-
+    @OneToMany(mappedBy = "backoffice")
+    List<Agent> agents;
 }
