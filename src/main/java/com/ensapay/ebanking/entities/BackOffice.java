@@ -21,6 +21,6 @@ public class BackOffice {
     private String prenom;
     private String email;
     private  String phone ;
-    @OneToMany(mappedBy = "backoffice")
+    @OneToMany(mappedBy = "backOffice")
     List<Agent> agents;
 }
