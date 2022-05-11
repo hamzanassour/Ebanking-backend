@@ -1,0 +1,30 @@
+name: CI pipeline
+on:
+  push:
+
+jobs:
+  build:
+    name: Build
+    runs-on: ubuntu-latest
+    steps:
+      - name: check out code
+        uses: actions/checkout@v2
+
+      - name: setup java
+        uses: actions/setup-java@v2
+        with:
+          distribution: microsoft
+          java-version: '11'
+          cache: 'maven'
+      - name: running tests
+        run: |
+          ls
+          mvn test
+
+      - name: build package
+        run: mvn -q package -Dmaven.test.skip=true
+
+
+
+
+
