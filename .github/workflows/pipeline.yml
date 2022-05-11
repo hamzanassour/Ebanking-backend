@@ -24,6 +24,25 @@ jobs:
       - name: build package
         run: mvn -q package -Dmaven.test.skip=true
 
+      - name: Upload artifact
+        uses: actions/upload-artifact@v2
+        with:
+          name: build
+          path: target/**
+
+  deploy:
+    name: deploy
+    runs-on: ubuntu-latest
+    needs:
+      - build
+    steps:
+      - name: Download Build Artifact
+        uses: actions/download-artifact@v2
+        with:
+          name: build
+          path: target
+      - name: show content of target
+        run: ls target
 
 
 
