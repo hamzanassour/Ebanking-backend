@@ -1,5 +1,6 @@
 package com.ensapay.ebanking.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -24,7 +25,11 @@ import java.util.List;
 public @Data class Agent extends user {
 
     @ManyToOne
-    @JoinColumn(name="CREATION_ADMIN_AGENT")
-    BackOffice creation;
+    @JsonIgnore
+    BackOffice Backoffice_creator;
+
+    @OneToMany(mappedBy = "agent_creator")
+    List<Client> Clients;
+
 
 }

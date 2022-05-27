@@ -10,4 +10,6 @@ public interface BackOfficeRepository extends JpaRepository<BackOffice,Long> {
 
     Optional<BackOffice> findByUsername(String username);
     Optional<BackOffice> findById(Long Id);
+
+    Optional<BackOffice> findByEmail(String email);
 }

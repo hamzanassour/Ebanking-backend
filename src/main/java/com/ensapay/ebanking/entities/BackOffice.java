@@ -1,17 +1,16 @@
 package com.ensapay.ebanking.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
-import javax.persistence.AttributeOverride;
-import javax.persistence.AttributeOverrides;
-import javax.persistence.Column;
-import javax.persistence.Entity;
+import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Getter
 @Setter
 @NoArgsConstructor
-@AllArgsConstructor
+
 @AttributeOverrides({
         @AttributeOverride(name = "id", column = @Column(name = "ID_BACKOFFICE")),
         @AttributeOverride(name = "nom", column = @Column(name = "NOM_BACKOFFICE")),
@@ -25,4 +24,8 @@ import javax.persistence.Entity;
 
 
 public  class BackOffice extends user {
+
+    @JsonIgnore
+    @OneToMany(mappedBy = "Backoffice_creator")
+    List<Agent> Agents;
 }

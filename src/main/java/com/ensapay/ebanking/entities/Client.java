@@ -1,5 +1,6 @@
 package com.ensapay.ebanking.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
 import javax.persistence.*;
@@ -11,7 +12,7 @@ import java.util.List;
 @Getter
 @Setter
 @NoArgsConstructor
-@AllArgsConstructor
+
 @AttributeOverrides({
         @AttributeOverride(name = "id", column = @Column(name = "ID_CLIENT")),
         @AttributeOverride(name = "nom", column = @Column(name = "NOM_CLIENT")),
@@ -24,5 +25,20 @@ import java.util.List;
 })
 public  class Client extends user {
 
+    @JsonIgnore
+    @Column(name="COMPTES_CLIENT")
+    @OneToMany(mappedBy="proprietaire",cascade=CascadeType.ALL)
+    List<Compte> comptes;
+
+    @JsonIgnore
+    @ManyToOne
+    Agent agent_creator;
+
+
+
+    @JsonIgnore
+    @Column(name="COMPTES_BENEFICIAIRE")
+    @OneToMany(mappedBy="parent")
+    List<Benificiere> beneficiaires;
 
 }

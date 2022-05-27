@@ -2,20 +2,23 @@ package com.ensapay.ebanking.entities;
 
 import lombok.*;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
+
 @Entity
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
+@Table(name = "BENIFICIERE")
 
 public  class Benificiere {
     @Id
     @GeneratedValue
-    private Long id;
-    private String nom;
-    private String penom;
-    private int numero;
+    Long id;
+     String nom;
+     String penom;
+
+    @ManyToOne
+    Client parent;
+    String numero;
 }
