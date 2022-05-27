@@ -1,28 +1,28 @@
 package com.ensapay.ebanking.entities;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 import java.util.List;
 
-@Data
+
+@Entity
+@Table(name="CLIENT")
+@Getter
+@Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@Entity
-public class Client {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long codeClient;
-    private String nom ;
-    private String prenom;
-    private String email;
-    private String tel ;
-    private String adresse;
-    @OneToMany(mappedBy = "client")
-    List<Compte> comptes ;
-    @ManyToOne
-    private Agent agent;
+@AttributeOverrides({
+        @AttributeOverride(name = "id", column = @Column(name = "ID_CLIENT")),
+        @AttributeOverride(name = "nom", column = @Column(name = "NOM_CLIENT")),
+        @AttributeOverride(name = "prenom", column = @Column(name = "PRENOM_CLIENT")),
+        @AttributeOverride(name = "telephone", column = @Column(name = "TELEPHONE_CLIENT")),
+        @AttributeOverride(name = "email", column = @Column(name = "EMAIL_CLIENT")),
+        @AttributeOverride(name = "username", column = @Column(name = "USERNAME_CLIENT")),
+        @AttributeOverride(name = "password", column = @Column(name = "PASSWORD_CLIENT")),
+        @AttributeOverride(name = "role", column = @Column(name = "ROLE_CLIENT"))
+})
+public  class Client extends user {
+
 
 }

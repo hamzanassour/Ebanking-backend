@@ -1,29 +1,53 @@
 package com.ensapay.ebanking.entities;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import lombok.ToString;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import lombok.*;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.Date;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Entity
-@Data
+@Getter
+@Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@ToString
 
-public class Compte implements Serializable {
-    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private String  id ;
-    private Date createdAt;
-    private double balance;
-    private String curr;
+
+public  class Compte implements Serializable {
+
+    @Id
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
+    @Column(name="ID_COMPTE")
+    Long id;
+
+    @Column(name="NUMERO_COMPTE", unique=true)
+    String numero;
+
+    @Column(name="TYPE_COMPTE")
+    String type;
+
+    @Column(name="SOLDE_COMPTE")
+    double solde;
+    @Column(name="CREATION_DATE_COMPTE")
+    LocalDateTime creationDate;
+
+
+    @JoinColumn(name="PROPRIETAIRE_COMPTE")
     @ManyToOne
-    private Client client;
-    @OneToMany(mappedBy = "compte")
-    List<Transaction> transactions;
+    Client proprietaire;
+
+    @JoinColumn(name="CREATION_AGENT_COMPTE")
+    @ManyToOne
+    Agent creationAgent;
+    @JsonIgnore
+    @Column(name="VIREMENTS_ENVOYES_COMPTE")
+    @OneToMany(mappedBy="debiteur",cascade=CascadeType.ALL)
+    List<Virement> virementsEnvoyes;
+
+    @JsonIgnore
+    @Column(name="VIREMENTS_RECUS_COMPTE")
+    @OneToMany(mappedBy="creancier",cascade=CascadeType.ALL)
+    List<Virement> virementsRecus;
 }
