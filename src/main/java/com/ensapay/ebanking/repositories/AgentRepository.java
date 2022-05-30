@@ -16,6 +16,7 @@ public interface AgentRepository extends JpaRepository<Agent , Long> {
     Optional<Agent> findAgentByEmail(String email);
     Optional<Agent> findAgentByUsername(String username);
 
+    Optional<Agent> findAgentByCIN(String CIN);
 
 
 }

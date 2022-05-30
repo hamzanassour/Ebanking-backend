@@ -18,6 +18,7 @@ import java.util.List;
         @AttributeOverride(name = "nom", column = @Column(name = "NOM_CLIENT")),
         @AttributeOverride(name = "prenom", column = @Column(name = "PRENOM_CLIENT")),
         @AttributeOverride(name = "telephone", column = @Column(name = "TELEPHONE_CLIENT")),
+        @AttributeOverride(name = "CIN", column = @Column(name = "CIN_AGENT")),
         @AttributeOverride(name = "email", column = @Column(name = "EMAIL_CLIENT")),
         @AttributeOverride(name = "username", column = @Column(name = "USERNAME_CLIENT")),
         @AttributeOverride(name = "password", column = @Column(name = "PASSWORD_CLIENT")),

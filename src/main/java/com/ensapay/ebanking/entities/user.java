@@ -19,6 +19,8 @@ public   abstract class user {
     String prenom;
     String telephone;
     String email;
+
+    String CIN;
     @Column(unique=true,nullable=false)
     String username;
     @Column(nullable=false)
