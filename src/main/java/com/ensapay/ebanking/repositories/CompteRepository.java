@@ -9,4 +9,6 @@ import java.util.Optional;
 public interface CompteRepository extends JpaRepository<Compte , String> {
 
     Optional<Compte> findByNumero(String numero);
+
+    void deleteCompteByNumero(String numero);
 }

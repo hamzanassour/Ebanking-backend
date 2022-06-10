@@ -20,5 +20,6 @@ public  class Benificiere {
 
     @ManyToOne
     Client parent;
+
     String numero;
 }
