@@ -28,7 +28,7 @@ public  class Virement {
     Compte debiteur;
 
     @Column(name="DATE_VIREMENT")
-    LocalDateTime date_crreation;
+    LocalDateTime date;
 
     @Column(name="SOMME_ENV_VIREMENT")
     double sommeEnv;

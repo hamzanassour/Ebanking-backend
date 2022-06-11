@@ -1,15 +1,15 @@
 package com.ensapay.ebanking.repositories;
 
-import com.ensapay.ebanking.entities.user;
+import com.ensapay.ebanking.entities.AppUser;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 import java.util.Optional;
 
 @Repository
-public interface UserRepository extends JpaRepository<user,Long> {
+public interface UserRepository extends JpaRepository<AppUser,Long> {
 
-    Optional<user> findUserByUsername(String username);
+    Optional<AppUser> findUserByUsername(String username);
 
-    Optional<user> findUserByCIN(String CIN);
+    Optional<AppUser> findUserByCIN(String CIN);
 }

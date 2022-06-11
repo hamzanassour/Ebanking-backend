@@ -10,6 +10,5 @@ public interface BenificiereRepository extends JpaRepository<Benificiere,Long> {
       Optional<Benificiere> findBenificiereByid(Long id);
       void deleteBenificiereByid(Long id);
 
-      Optional<Benificiere> findBenificiereByUsername(String usename);
 
 }

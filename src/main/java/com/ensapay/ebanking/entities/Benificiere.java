@@ -14,7 +14,7 @@ import javax.persistence.*;
 public  class Benificiere {
     @Id
     @GeneratedValue
-    Long id;
+     Long id;
      String nom;
      String penom;
 

@@ -13,6 +13,6 @@ public interface VirementRepository extends JpaRepository<Virement,Long> {
 
     Optional<Virement> findById(Long aLong);
 
-    Optional<Virement> findVirementByDate_crreation(LocalDateTime date_creation);
+    Optional<Virement> findVirementByDate(LocalDateTime date);
 
 }

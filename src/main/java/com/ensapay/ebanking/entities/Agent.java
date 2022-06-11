@@ -21,7 +21,7 @@ import java.util.List;
 })
 
 
-public @Data class Agent extends user {
+public @Data class Agent extends AppUser {
 
     @ManyToOne
     @JsonIgnore

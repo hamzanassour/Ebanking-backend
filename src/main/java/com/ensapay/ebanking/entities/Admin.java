@@ -23,7 +23,7 @@ import java.util.List;
 })
 
 
-public  class Admin extends user {
+public  class Admin extends AppUser {
 
     @JsonIgnore
     @OneToMany(mappedBy = "Backoffice_creator")

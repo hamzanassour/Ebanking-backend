@@ -24,7 +24,7 @@ import java.util.List;
         @AttributeOverride(name = "password", column = @Column(name = "PASSWORD_CLIENT")),
         @AttributeOverride(name = "role", column = @Column(name = "ROLE_CLIENT"))
 })
-public  class Client extends user {
+public  class Client extends AppUser {
 
     @JsonIgnore
     @Column(name="COMPTES_CLIENT")
