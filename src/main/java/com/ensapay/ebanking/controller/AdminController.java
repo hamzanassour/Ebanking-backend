@@ -30,6 +30,32 @@ public class AdminController {
         return  adminService.findAllAdmin();
     }
 
+    @PostMapping("/add-admin")
+    @ResponseStatus(HttpStatus.CREATED)
+    public void addAdmin(@RequestBody Admin admin)
+    {
+        adminService.addAdmin(admin);
+    }
+
+    @PostMapping("/update/{id}")
+    @ResponseStatus(HttpStatus.CREATED)
+    public void updateAdmin(@PathVariable("id") Long id,@RequestBody Admin admin)
+    {
+        adminService.updateAdmin(id,admin);
+    }
+
+
+    @GetMapping("/find/{username}")
+    @ResponseStatus(HttpStatus.OK)
+    public Admin findAdminByUsername(@PathVariable("username") String username)
+    {
+        return  adminService.getByUsername(username);
+    }
+
+
+
+
+
 
 
 

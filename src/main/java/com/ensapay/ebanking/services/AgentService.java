@@ -32,14 +32,14 @@ public class AgentService {
     public Agent findAgentById(Long Id)
     {
         return agentRepository.findAgentById(Id).orElseThrow(
-                () -> new NotFoundExcepton("this agent n'exist pas")
+                () -> new NotFoundExcepton("this agent doesn't exist")
         );
     }
 
     public Agent findAgentByUsername(String username)
     {
         return agentRepository.findAgentByUsername(username).orElseThrow(
-                () -> new NotFoundExcepton("this agnet doesnt exist")
+                () -> new NotFoundExcepton("this agent doesn't exist")
         );
     }
 
@@ -64,7 +64,7 @@ public class AgentService {
         );
         if(agentRepository.findAgentByUsername(agent.getUsername()).isPresent())
         {
-            throw  new AlreadyexistException("the username you selected already exist ");
+            throw  new AlreadyexistException("this username is already taken");
         }
         if(!agent.getNom().isEmpty()) updated.setNom(agent.getNom());
         if(!agent.getPrenom().isEmpty()) updated.setPrenom(agent.getPrenom());

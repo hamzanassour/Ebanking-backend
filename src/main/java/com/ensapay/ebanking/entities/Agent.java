@@ -23,6 +23,7 @@ import java.util.List;
 
 public @Data class Agent extends AppUser {
 
+    String Agency;
     @ManyToOne
     @JsonIgnore
     Admin Backoffice_creator;

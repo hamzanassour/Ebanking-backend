@@ -6,6 +6,8 @@ import com.ensapay.ebanking.exceptions.AlreadyexistException;
 import com.ensapay.ebanking.exceptions.NotFoundExcepton;
 import com.ensapay.ebanking.repositories.AdminRepository;
 import com.ensapay.ebanking.repositories.UserRepository;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -36,6 +38,27 @@ public class AdminService {
                 () -> new NotFoundExcepton("admin doesnt exist")
         );
     }
+    public Admin getByUsername(String username)
+    {
+        return  adminRepository.findByUsername(username).orElseThrow(
+                () -> new NotFoundExcepton("l'agent n'exist pas")
+        );
+    }
+
+    public void addAdmin(Admin admin)
+    {
+        if(userRepository.findUserByUsername(admin.getUsername()).isPresent())
+        {
+            throw new AlreadyexistException("an amdin with the same username already exist");
+        }
+        if(adminRepository.findByCIN(admin.getCIN()).isPresent())
+        {
+            throw new AlreadyexistException("admin with the same CIN"+ admin.getCIN()+"already exist");
+        }
+
+        adminRepository.save(admin);
+
+    }
     public void updateAdmin(Long id,Admin admin)
     {
         Admin updated= adminRepository.findById(id).orElseThrow(
@@ -54,7 +77,7 @@ public class AdminService {
         if(admin.getTelephone()!=null ) updated.setTelephone(admin.getTelephone());
         if(admin.getUsername()!=null ) updated.setUsername(admin.getUsername());
         if(admin.getEmail()!=null ) updated.setEmail(admin.getEmail());
-        if(admin.getPassword()!=null ) updated.setPassword(admin.getPassword());
+        if(admin.getPassword()!=null ) updated.setPassword(new BCryptPasswordEncoder().encode(admin.getPassword()));
         admin.setRole("Admin");
 
         userRepository.save(admin);
