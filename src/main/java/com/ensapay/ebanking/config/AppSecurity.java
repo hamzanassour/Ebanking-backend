@@ -18,8 +18,8 @@ import java.util.Collections;
 
 public class AppSecurity extends WebSecurityConfigurerAdapter {
 
-    AdminService adminService;
-    UserprincipalService userprincipalService;
+     private final AdminService adminService;
+     private final UserprincipalService userprincipalService;
 
     @Autowired
     public AppSecurity(AdminService adminService,UserprincipalService userprincipalService)
@@ -28,29 +28,7 @@ public class AppSecurity extends WebSecurityConfigurerAdapter {
         this.userprincipalService=userprincipalService;
     }
 
-    @PostConstruct
-    public void init()
-    {
-        try
-        {
-            adminService.findAllAdmin();
-        }
-        catch (NotFoundExcepton e)
-        {
-            Admin admin = new Admin();
-            admin.setUsername("admin");
-            admin.setNom("admin");
-            admin.setCIN("");
-            admin.setEmail("ensapay@gmail.com");
-            admin.setPrenom("admin");
-            admin.setTelephone("0500000000");
-            admin.setRole("Admin");
-            admin.setPassword("Admin");
-            adminService.addAdmin(admin);
 
-
-        }
-    }
 
     @Bean
     public DaoAuthenticationProvider AuthProvider()
