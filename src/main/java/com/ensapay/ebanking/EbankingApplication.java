@@ -25,6 +25,7 @@ public class EbankingApplication implements CommandLineRunner {
 
 
 
+   // Creating a default admin
     public void init()
     {
 

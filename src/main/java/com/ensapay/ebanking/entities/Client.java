@@ -37,9 +37,7 @@ public  class Client extends AppUser {
 
 
 
-    @JsonIgnore
-    @Column(name="COMPTES_BENEFICIAIRE")
-    @OneToMany(mappedBy="parent")
-    List<Benificiere> beneficiaires;
+
+
 
 }
