@@ -55,7 +55,9 @@ public class AdminService {
         {
             throw new AlreadyexistException("admin with the same CIN"+ admin.getCIN()+"already exist");
         }
-
+        admin.setRole("Admin");
+        String Crypted_password=admin.getPassword();
+        admin.setPassword(new BCryptPasswordEncoder().encode(Crypted_password));
         adminRepository.save(admin);
 
     }
@@ -77,7 +79,11 @@ public class AdminService {
         if(admin.getTelephone()!=null ) updated.setTelephone(admin.getTelephone());
         if(admin.getUsername()!=null ) updated.setUsername(admin.getUsername());
         if(admin.getEmail()!=null ) updated.setEmail(admin.getEmail());
-        if(admin.getPassword()!=null ) updated.setPassword(new BCryptPasswordEncoder().encode(admin.getPassword()));
+        if(admin.getPassword()!=null )
+        {
+            String Crypted_password=admin.getPassword();
+            updated.setPassword(new BCryptPasswordEncoder().encode(Crypted_password));
+        }
         admin.setRole("Admin");
 
         userRepository.save(admin);

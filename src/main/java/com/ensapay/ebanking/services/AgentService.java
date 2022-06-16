@@ -1,14 +1,16 @@
 package com.ensapay.ebanking.services;
 
+import com.ensapay.ebanking.entities.Admin;
 import com.ensapay.ebanking.entities.Agent;
 import com.ensapay.ebanking.exceptions.AlreadyexistException;
 import com.ensapay.ebanking.exceptions.NotFoundExcepton;
 import com.ensapay.ebanking.repositories.AgentRepository;
 import com.ensapay.ebanking.repositories.UserRepository;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class AgentService {
@@ -17,11 +19,14 @@ public class AgentService {
    private final AgentRepository agentRepository;
    private final UserRepository userRepository;
 
+   private  final  AdminService adminService;
 
-    public AgentService(AgentRepository agentRepository, UserRepository userRepository, AdminService adminService) {
+
+    public AgentService(AgentRepository agentRepository, UserRepository userRepository, AdminService adminService, AdminService adminService1) {
         this.agentRepository = agentRepository;
         this.userRepository = userRepository;
 
+        this.adminService = adminService1;
     }
 
     public List<Agent> findAllAgents()
@@ -53,7 +58,8 @@ public class AgentService {
        {
            throw new AlreadyexistException("agent already exist");
        }
-
+       Admin creator=adminService.getByUsername(SecurityContextHolder.getContext().getAuthentication().getName());
+       agent.setBackoffice_creator(creator);
        agentRepository.save(agent);
     }
 
@@ -72,10 +78,8 @@ public class AgentService {
         if(!agent.getUsername().isEmpty()) updated.setUsername(agent.getUsername());
         if(!agent.getEmail().isEmpty() )   updated.setEmail(agent.getEmail());
         if(!agent.getTelephone().isEmpty()) updated.setTelephone(agent.getTelephone());
-        if(!agent.getPassword().isEmpty())  updated.setPassword(agent.getPassword());
-
-
-
+        if(!agent.getPassword().isEmpty())  updated.setPassword(new BCryptPasswordEncoder().encode(agent.getPassword()));
+        updated.setRole("Admin");
         agentRepository.save(updated);
 
     }
