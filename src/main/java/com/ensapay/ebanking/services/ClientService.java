@@ -10,17 +10,19 @@ import javassist.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+@Service
 public class ClientService {
 
   private final   UserRepository userRepository;
   private  final  ClientRepository clientRepository;
-  private final AgentService agentService;
+  private final   AgentService agentService;
 
 
-  @Autowired
+
     public ClientService(UserRepository userRepository, ClientRepository clientRepository, AgentService agentService) {
         this.userRepository = userRepository;
         this.clientRepository = clientRepository;
@@ -38,6 +40,13 @@ public class ClientService {
     {
         return  clientRepository.findClientByUsername(username).orElseThrow(
                 ()->new NotFoundExcepton("the client doesn't exist")
+        );
+    }
+
+    public Client findClientByCIN(String CIN)
+    {
+        return  clientRepository.findClientByCIN(CIN).orElseThrow(
+                ()-> new NotFoundExcepton("the client doesnt exist")
         );
     }
 

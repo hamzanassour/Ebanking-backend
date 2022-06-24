@@ -5,14 +5,17 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Optional;
 
 @Repository
-public interface VirementRepository extends JpaRepository<Virement,Long> {
+public interface VirementRepository extends JpaRepository<Long, Virement> {
 
 
-    Optional<Virement> findById(Long aLong);
+     List<Virement> findAllVirement();
 
     Optional<Virement> findVirementByDate(LocalDateTime date);
 
+
+    Optional<Virement> findById(Long id);
 }

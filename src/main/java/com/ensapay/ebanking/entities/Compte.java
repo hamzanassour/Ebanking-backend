@@ -5,6 +5,8 @@ import lombok.*;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.math.BigDecimal;
+import java.math.BigInteger;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -18,36 +20,34 @@ import java.util.List;
 public  class Compte implements Serializable {
 
     @Id
-    @GeneratedValue(strategy=GenerationType.IDENTITY)
-    @Column(name="ID_COMPTE")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "ID_COMPTE")
     Long id;
 
-    @Column(name="NUMERO_COMPTE", unique=true)
+    @Column(name = "NUMERO_COMPTE", unique = true)
     String numero;
 
-    @Column(name="TYPE_COMPTE")
-    String type;
-
-    @Column(name="SOLDE_COMPTE")
+    @Column(name = "SOLDE_COMPTE")
     double solde;
-    @Column(name="CREATION_DATE_COMPTE")
+    @Column(name = "CREATION_DATE_COMPTE")
     LocalDateTime creationDate;
 
 
-    @JoinColumn(name="PROPRIETAIRE_COMPTE")
+    @JoinColumn(name = "PROPRIETAIRE_COMPTE")
     @ManyToOne
     Client proprietaire;
 
-    @JoinColumn(name="CREATION_AGENT_COMPTE")
+    @JoinColumn(name = "CREATION_AGENT_COMPTE")
     @ManyToOne
     Agent creationAgent;
     @JsonIgnore
-    @Column(name="VIREMENTS_ENVOYES_COMPTE")
-    @OneToMany(mappedBy="debiteur",cascade=CascadeType.ALL)
-    List<Virement> virementsEnvoyes;
+    @Column(name = "VIREMENTS_ENVOYES_COMPTE")
+    @OneToMany(mappedBy = "debiteur", cascade = CascadeType.ALL)
+    List<Virement> Envoyes;
+
 
     @JsonIgnore
     @Column(name="VIREMENTS_RECUS_COMPTE")
     @OneToMany(mappedBy="creancier",cascade=CascadeType.ALL)
-    List<Virement> virementsRecus;
+    List<Virement> Recus;
 }

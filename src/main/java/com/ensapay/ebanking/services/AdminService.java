@@ -6,7 +6,6 @@ import com.ensapay.ebanking.exceptions.AlreadyexistException;
 import com.ensapay.ebanking.exceptions.NotFoundExcepton;
 import com.ensapay.ebanking.repositories.AdminRepository;
 import com.ensapay.ebanking.repositories.UserRepository;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
