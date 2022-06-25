@@ -59,8 +59,8 @@ jobs:
         uses: techmmunity/docker-heroku-deploy@v1.0.0
         with:
           # Email Linked to your Heroku Account
-          email: abdelilah.boudribila0712@gmail.com
+          email: ${{secrets.HEROKU_EMAIL}}
           # Your Heroku API Key
-          api_key: 3fe5d231-cfdd-40e4-9600-2820b500fde6
+          api_key: ${{secrets.HEROKU_API_KEY}}
           # Your Heroku App Name
-          app_name: bank-rest
+          app_name: ${{secrets.HEROKU_APP}}
