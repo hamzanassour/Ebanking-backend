@@ -28,7 +28,7 @@ public class AdminController {
         return  adminService.findAllAdmin();
     }
 
-    @PostMapping("/add-admin")
+    @PostMapping("/addAdmin")
     @ResponseStatus(HttpStatus.CREATED)
     public void addAdmin(@RequestBody Admin admin)
     {

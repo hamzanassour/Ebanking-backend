@@ -7,7 +7,6 @@ import com.ensapay.ebanking.entities.Virement;
 import com.ensapay.ebanking.exceptions.AlreadyexistException;
 import com.ensapay.ebanking.exceptions.NotFoundExcepton;
 import com.ensapay.ebanking.repositories.CompteRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
@@ -19,9 +18,10 @@ import java.util.Random;
 @Service
 public class CompteService {
 
-    private final CompteRepository compteRepository;
-    private final  ClientService clientService;
-    private  final AgentService agentService;
+
+        private final CompteRepository compteRepository;
+        private final  ClientService clientService;
+        private  final AgentService agentService;
 
 
     public CompteService(CompteRepository compteRepository, ClientService clientService, AgentService agentService) {
@@ -32,38 +32,37 @@ public class CompteService {
 
 
 
-    public List<Compte> gatAllComptes(Long id)
-    {
-        List<Compte> client_comptes= new ArrayList<>();
-
-        if(id!=null)
+        public List<Compte> gatAllComptes(Long id)
         {
-                   client_comptes.add( compteRepository.findById(id)
-                           .orElseThrow(()
-                           -> new NotFoundExcepton("compte dont exist")));
-        }
-        else {
-            client_comptes=compteRepository.findAll();
-        }
-        return  client_comptes;
-    }
+            List<Compte> client_comptes= new ArrayList<>();
 
-    public Compte findCompteBynumero(String numero)
-    {
-        if(!numero.isEmpty())
+            if(id!=null)
+            {
+                client_comptes.add( compteRepository.findById(id)
+                        .orElseThrow(()
+                                -> new NotFoundExcepton("compte dont exist")));
+            }
+            else {
+                client_comptes=compteRepository.findAll();
+            }
+            return  client_comptes;
+        }
+
+        public Compte findCompteBynumero(String numero)
         {
-            return  compteRepository.findByNumero(numero).orElseThrow(
-                    ()-> new NotFoundExcepton("the account you chosen doesnt exist")
-            );
+            if(!numero.isEmpty())
+            {
+                return  compteRepository.findByNumero(numero).orElseThrow(
+                        ()-> new NotFoundExcepton("the account you chosen doesnt exist")
+                );
+            }
+            else {
+                return null;
+            }
         }
-        else {
-            return null;
-        }
-    }
 
-    public List<Virement> virementsEnvoyer(Long id)
-    {
-
+        public List<Virement> virementsEnvoyer(Long id)
+        {
 
         if(id!=null)
         {

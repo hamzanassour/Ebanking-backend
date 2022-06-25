@@ -8,14 +8,16 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ComponentScan;
 
 import javax.annotation.PostConstruct;
 
 @SpringBootApplication
-public class EbankingApplication implements CommandLineRunner {
+
+public class EbankingApplication  {
 
     //Field injection (for test )
-    @Autowired
+
     AdminService adminService;
 
     public static void main(String[] args) {
@@ -26,28 +28,6 @@ public class EbankingApplication implements CommandLineRunner {
 
 
    // Creating a default admin
-    public void init()
-    {
 
 
-
-            Admin admin = new Admin();
-            admin.setUsername("admin");
-            admin.setNom("admin");
-            admin.setCIN("");
-            admin.setEmail("ensapay@gmail.com");
-            admin.setPrenom("admin");
-            admin.setTelephone("0500000000");
-            admin.setRole("Admin");
-            admin.setPassword("Admin");
-            adminService.addAdmin(admin);
-
-    }
-    @Override
-    public void run(String... args) throws Exception {
-        if(adminService.findAllAdmin().isEmpty())
-        {
-            init();
-        }
-    }
 }

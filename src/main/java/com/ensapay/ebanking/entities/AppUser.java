@@ -10,7 +10,7 @@ import javax.persistence.*;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public   abstract class AppUser {
+public abstract class AppUser {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

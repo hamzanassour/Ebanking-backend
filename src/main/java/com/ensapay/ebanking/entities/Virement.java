@@ -19,6 +19,9 @@ public  class Virement {
     @Column(name="ID_VIREMENT")
     Long id;
 
+    @Column(name = "CODE_VIREMENT")
+    String code;
+
     @JoinColumn(name="CREANCIER_VIREMENT")
     @ManyToOne
     Compte creancier;
